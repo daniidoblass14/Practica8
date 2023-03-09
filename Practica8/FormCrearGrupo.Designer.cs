@@ -57,17 +57,19 @@
             // 
             // btnCrearGrupo
             // 
+            this.btnCrearGrupo.BackColor = System.Drawing.SystemColors.Highlight;
             this.btnCrearGrupo.Enabled = false;
             this.btnCrearGrupo.Location = new System.Drawing.Point(81, 201);
             this.btnCrearGrupo.Name = "btnCrearGrupo";
             this.btnCrearGrupo.Size = new System.Drawing.Size(105, 24);
             this.btnCrearGrupo.TabIndex = 14;
             this.btnCrearGrupo.Text = "AÑADIR";
-            this.btnCrearGrupo.UseVisualStyleBackColor = true;
+            this.btnCrearGrupo.UseVisualStyleBackColor = false;
             this.btnCrearGrupo.Click += new System.EventHandler(this.btnCrearGrupo_Click);
             // 
             // lstAsignaturasCrearGrupo
             // 
+            this.lstAsignaturasCrearGrupo.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.lstAsignaturasCrearGrupo.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.lstAsignaturasCrearGrupo.FormattingEnabled = true;
             this.lstAsignaturasCrearGrupo.Items.AddRange(new object[] {
@@ -90,6 +92,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.ClientSize = new System.Drawing.Size(237, 252);
             this.Controls.Add(this.lstAsignaturasCrearGrupo);
             this.Controls.Add(this.txtNombreNuevoGrupo);

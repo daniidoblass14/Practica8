@@ -56,13 +56,14 @@
             // 
             // btnCrearAlumno
             // 
+            this.btnCrearAlumno.BackColor = System.Drawing.SystemColors.Highlight;
             this.btnCrearAlumno.Enabled = false;
             this.btnCrearAlumno.Location = new System.Drawing.Point(225, 43);
             this.btnCrearAlumno.Name = "btnCrearAlumno";
             this.btnCrearAlumno.Size = new System.Drawing.Size(111, 23);
             this.btnCrearAlumno.TabIndex = 10;
             this.btnCrearAlumno.Text = "Guardar";
-            this.btnCrearAlumno.UseVisualStyleBackColor = true;
+            this.btnCrearAlumno.UseVisualStyleBackColor = false;
             this.btnCrearAlumno.Click += new System.EventHandler(this.btnGuardarAlumno_Click);
             // 
             // errorProvider
@@ -73,6 +74,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.ClientSize = new System.Drawing.Size(800, 188);
             this.Controls.Add(this.btnCrearAlumno);
             this.Controls.Add(this.lblNombreAlumnoNuevo);

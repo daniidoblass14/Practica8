@@ -65,37 +65,40 @@ namespace Practica8
             // 
             // btnImportar
             // 
+            this.btnImportar.BackColor = System.Drawing.SystemColors.Highlight;
             this.btnImportar.Location = new System.Drawing.Point(288, 275);
             this.btnImportar.Name = "btnImportar";
             this.btnImportar.Size = new System.Drawing.Size(105, 27);
             this.btnImportar.TabIndex = 3;
             this.btnImportar.Text = "IMPORTAR";
-            this.btnImportar.UseVisualStyleBackColor = true;
+            this.btnImportar.UseVisualStyleBackColor = false;
             this.btnImportar.Click += new System.EventHandler(this.btnImportar_Click);
             // 
             // btnNuevo
             // 
+            this.btnNuevo.BackColor = System.Drawing.SystemColors.Highlight;
             this.btnNuevo.Location = new System.Drawing.Point(510, 275);
             this.btnNuevo.Name = "btnNuevo";
             this.btnNuevo.Size = new System.Drawing.Size(105, 27);
             this.btnNuevo.TabIndex = 1;
             this.btnNuevo.Text = "NUEVO GRP";
-            this.btnNuevo.UseVisualStyleBackColor = true;
+            this.btnNuevo.UseVisualStyleBackColor = false;
             this.btnNuevo.Click += new System.EventHandler(this.btnNuevo_Click);
             // 
             // lblTitulo
             // 
             this.lblTitulo.AutoSize = true;
-            this.lblTitulo.Font = new System.Drawing.Font("Segoe UI", 19F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.lblTitulo.Font = new System.Drawing.Font("Times New Roman", 18.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point);
             this.lblTitulo.Location = new System.Drawing.Point(209, 32);
             this.lblTitulo.Name = "lblTitulo";
-            this.lblTitulo.Size = new System.Drawing.Size(278, 36);
+            this.lblTitulo.Size = new System.Drawing.Size(270, 30);
             this.lblTitulo.TabIndex = 4;
             this.lblTitulo.Text = "GESTIÓN DE GRUPOS";
             // 
             // dtgvGrupos
             // 
             this.dtgvGrupos.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dtgvGrupos.BackgroundColor = System.Drawing.SystemColors.ButtonHighlight;
             this.dtgvGrupos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dtgvGrupos.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.dtgvGrupos.Location = new System.Drawing.Point(45, 71);
@@ -110,6 +113,7 @@ namespace Practica8
             // dtgvAlumnos
             // 
             this.dtgvAlumnos.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dtgvAlumnos.BackgroundColor = System.Drawing.SystemColors.ButtonHighlight;
             this.dtgvAlumnos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dtgvAlumnos.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.dtgvAlumnos.Location = new System.Drawing.Point(45, 384);
@@ -121,28 +125,31 @@ namespace Practica8
             // 
             // btnAgregarAlumno
             // 
+            this.btnAgregarAlumno.BackColor = System.Drawing.SystemColors.Highlight;
             this.btnAgregarAlumno.Enabled = false;
             this.btnAgregarAlumno.Location = new System.Drawing.Point(510, 501);
             this.btnAgregarAlumno.Name = "btnAgregarAlumno";
             this.btnAgregarAlumno.Size = new System.Drawing.Size(105, 27);
             this.btnAgregarAlumno.TabIndex = 6;
             this.btnAgregarAlumno.Text = "AÑADIR ALU";
-            this.btnAgregarAlumno.UseVisualStyleBackColor = true;
+            this.btnAgregarAlumno.UseVisualStyleBackColor = false;
             this.btnAgregarAlumno.Click += new System.EventHandler(this.btnAgregarAlumno_Click);
             // 
             // btnBorrarAlumno
             // 
+            this.btnBorrarAlumno.BackColor = System.Drawing.SystemColors.Highlight;
             this.btnBorrarAlumno.Enabled = false;
             this.btnBorrarAlumno.Location = new System.Drawing.Point(399, 501);
             this.btnBorrarAlumno.Name = "btnBorrarAlumno";
             this.btnBorrarAlumno.Size = new System.Drawing.Size(105, 27);
             this.btnBorrarAlumno.TabIndex = 7;
             this.btnBorrarAlumno.Text = "BORRAR ALU";
-            this.btnBorrarAlumno.UseVisualStyleBackColor = true;
+            this.btnBorrarAlumno.UseVisualStyleBackColor = false;
             this.btnBorrarAlumno.Click += new System.EventHandler(this.btnBorrarAlumno_Click);
             // 
             // menuPrincipal
             // 
+            this.menuPrincipal.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.menuPrincipal.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.archivoToolStripMenuItem,
             this.ayudaToolStripMenuItem});
@@ -222,55 +229,59 @@ namespace Practica8
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Segoe UI", 19F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label1.Font = new System.Drawing.Font("Times New Roman", 18.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point);
             this.label1.Location = new System.Drawing.Point(248, 345);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(145, 36);
+            this.label1.Size = new System.Drawing.Size(135, 30);
             this.label1.TabIndex = 33;
             this.label1.Text = "ALUMNOS";
             // 
             // btnExportar
             // 
+            this.btnExportar.BackColor = System.Drawing.SystemColors.Highlight;
             this.btnExportar.Enabled = false;
             this.btnExportar.Location = new System.Drawing.Point(177, 275);
             this.btnExportar.Name = "btnExportar";
             this.btnExportar.Size = new System.Drawing.Size(105, 27);
             this.btnExportar.TabIndex = 4;
             this.btnExportar.Text = "EXPORTAR";
-            this.btnExportar.UseVisualStyleBackColor = true;
+            this.btnExportar.UseVisualStyleBackColor = false;
             this.btnExportar.Click += new System.EventHandler(this.btnExportar_Click);
             // 
             // btnEditarAlumno
             // 
+            this.btnEditarAlumno.BackColor = System.Drawing.SystemColors.Highlight;
             this.btnEditarAlumno.Enabled = false;
             this.btnEditarAlumno.Location = new System.Drawing.Point(288, 501);
             this.btnEditarAlumno.Name = "btnEditarAlumno";
             this.btnEditarAlumno.Size = new System.Drawing.Size(105, 27);
             this.btnEditarAlumno.TabIndex = 8;
             this.btnEditarAlumno.Text = "EDITAR ALU";
-            this.btnEditarAlumno.UseVisualStyleBackColor = true;
+            this.btnEditarAlumno.UseVisualStyleBackColor = false;
             this.btnEditarAlumno.Click += new System.EventHandler(this.btnEditarAlumno_Click);
             // 
             // btnFiltrarAlumnos
             // 
+            this.btnFiltrarAlumnos.BackColor = System.Drawing.SystemColors.Highlight;
             this.btnFiltrarAlumnos.Enabled = false;
             this.btnFiltrarAlumnos.Location = new System.Drawing.Point(45, 501);
             this.btnFiltrarAlumnos.Name = "btnFiltrarAlumnos";
             this.btnFiltrarAlumnos.Size = new System.Drawing.Size(108, 27);
             this.btnFiltrarAlumnos.TabIndex = 9;
             this.btnFiltrarAlumnos.Text = "FILTRAR";
-            this.btnFiltrarAlumnos.UseVisualStyleBackColor = true;
+            this.btnFiltrarAlumnos.UseVisualStyleBackColor = false;
             this.btnFiltrarAlumnos.Click += new System.EventHandler(this.btnFiltrarAlumno_Click);
             // 
             // btnBorrarGrupo
             // 
+            this.btnBorrarGrupo.BackColor = System.Drawing.SystemColors.Highlight;
             this.btnBorrarGrupo.Enabled = false;
             this.btnBorrarGrupo.Location = new System.Drawing.Point(399, 275);
             this.btnBorrarGrupo.Name = "btnBorrarGrupo";
             this.btnBorrarGrupo.Size = new System.Drawing.Size(105, 27);
             this.btnBorrarGrupo.TabIndex = 2;
             this.btnBorrarGrupo.Text = "BORRAR";
-            this.btnBorrarGrupo.UseVisualStyleBackColor = true;
+            this.btnBorrarGrupo.UseVisualStyleBackColor = false;
             this.btnBorrarGrupo.Click += new System.EventHandler(this.btnBorrarGrupo_Click);
             // 
             // FormMain
@@ -278,6 +289,7 @@ namespace Practica8
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
+            this.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.ClientSize = new System.Drawing.Size(663, 551);
             this.Controls.Add(this.btnBorrarGrupo);
             this.Controls.Add(this.btnFiltrarAlumnos);
