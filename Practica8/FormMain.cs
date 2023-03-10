@@ -122,16 +122,31 @@ namespace Practica8
 
         private void btnBorrarGrupo_Click(object sender, EventArgs e)
         {
-            if (MessageBox.Show("¿Deseas borrar el grupo " + grupoSel.Nombre + "?", "Confirmación", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+            try
             {
-                grupos.Remove(grupoSel);
-                MessageBox.Show("Se ha borrado correctamente el grupo " + grupoSel.Nombre, "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                actualizarGrupos();
+                if (grupoSel != null)
+                {
+                    if (MessageBox.Show("¿Deseas borrar el grupo " + grupoSel.Nombre + "?", "Confirmación", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+                    {
+                        grupos.Remove(grupoSel);
+                        MessageBox.Show("Se ha borrado correctamente el grupo " + grupoSel.Nombre, "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        actualizarGrupos();
+                    }
+                    else
+                    {
+                        MessageBox.Show("No se ha borrado el grupo " + grupoSel.Nombre, "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("No hay ningún grupo seleccionado", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
-            else
+            catch (NullReferenceException ex)
             {
-                MessageBox.Show("No se ha borrado al alumno " + grupoSel.Nombre, "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("ERROR AL BORRAR, NO SE PUEDO REALIZAR LA ACCIÓN" + grupoSel.Nombre, "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+
         }
 
         private void btnImportar_Click(object sender, EventArgs e)
@@ -170,6 +185,7 @@ namespace Practica8
                 {
                     insertarRegistro(grupoImportado);
                     MessageBox.Show("Se ha importado correctamente el grupo", "Grupo creado", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    
                 }
 
                 ficheroLeer.Close();
@@ -179,58 +195,103 @@ namespace Practica8
         }
         private void btnExportar_Click(object sender, EventArgs e)
         {
-            SaveFileDialog sfd = new SaveFileDialog();
-
-            sfd.Filter = "Archivos GRU (*.gru)|*.gru";
-            sfd.FilterIndex = 1;
-            sfd.RestoreDirectory = true;
-            sfd.FileName = grupoSel.Nombre;
-            sfd.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-
-            if (sfd.ShowDialog() == DialogResult.OK)
+            if (grupoSel == null)
             {
-                // Serialize the object to the specified file
-                using (FileStream ficheroGuardar = new FileStream(sfd.FileName, FileMode.Create))
+                MessageBox.Show("No hay ningún grupo seleccionado", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else
+            {
+                SaveFileDialog sfd = new SaveFileDialog();
+
+                sfd.Filter = "Archivos GRU (*.gru)|*.gru";
+                sfd.FilterIndex = 1;
+                sfd.RestoreDirectory = true;
+                sfd.FileName = grupoSel.Nombre;
+                sfd.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+
+                if (sfd.ShowDialog() == DialogResult.OK)
                 {
-                    BinaryFormatter formatter = new BinaryFormatter();
-                    formatter.Serialize(ficheroGuardar, grupoSel);
+                    // Serialize the object to the specified file
+                    using (FileStream ficheroGuardar = new FileStream(sfd.FileName, FileMode.Create))
+                    {
+                        BinaryFormatter formatter = new BinaryFormatter();
+                        formatter.Serialize(ficheroGuardar, grupoSel);
+                    }
+                    MessageBox.Show("Se ha exportado correctamente el grupo " + grupoSel.Nombre, "Grupo importado", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
-                MessageBox.Show("Se ha exportado correctamente el grupo " + grupoSel.Nombre, "Grupo importado", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
 
         private void btnAgregarAlumno_Click(object sender, EventArgs e)
         {
-            FormDatosAlumno formCrearAlumno = new FormDatosAlumno();
-            if (formCrearAlumno.ShowDialog() == DialogResult.OK)
+
+            if (FormMain.grupoSel != null)
             {
-                insertarRegistro(grupoSel.Alumnos[grupoSel.Alumnos.Count - 1]);
+                FormDatosAlumno formCrearAlumno = new FormDatosAlumno();
+                if (formCrearAlumno.ShowDialog() == DialogResult.OK)
+                {
+                    insertarRegistro(grupoSel.Alumnos[grupoSel.Alumnos.Count - 1]);
+                }
             }
+            else
+            {
+                MessageBox.Show("No hay un grupo seleccionado.");
+                // No abre el formulario para agregar alumnos
+            }
+
         }
 
         private void btnBorrarAlumno_Click(object sender, EventArgs e)
         {
-            Alumno alumnoSel = (Alumno)dtgvAlumnos.SelectedRows[0].Cells[1].Value;
-
-            if (MessageBox.Show("¿Deseas borrar al alumno " + alumnoSel.Nombre + " con matrícula " + alumnoSel.Matricula + "?", "Confirmación", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+            if (dtgvAlumnos.SelectedRows.Count > 0 && dtgvAlumnos.SelectedRows[0].Cells[1].Value != null && dtgvAlumnos.SelectedRows[0].Cells[1].Value is Alumno)
             {
-                grupoSel.borrarAlumno(alumnoSel.Matricula);
-                MessageBox.Show("Se ha borrado correctamente al alumno " + alumnoSel.Nombre + " con matrícula " + alumnoSel.Matricula, "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                actualizarAlumnos(grupoSel.Alumnos);
+                Alumno alumnoSel = (Alumno)dtgvAlumnos.SelectedRows[0].Cells[1].Value;
+
+                if (dtgvAlumnos.SelectedRows.Count > 0 && dtgvAlumnos.SelectedRows[0].Cells[1].Value != null)
+                {
+                    //Alumno alumnoSel = (Alumno)dtgvAlumnos.SelectedRows[0].Cells[1].Value;
+                    if (MessageBox.Show("¿Deseas borrar al alumno " + alumnoSel.Nombre + " con matrícula " + alumnoSel.Matricula + "?", "Confirmación", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+                    {
+                        grupoSel.borrarAlumno(alumnoSel.Matricula);
+                        MessageBox.Show("Se ha borrado correctamente al alumno " + alumnoSel.Nombre + " con matrícula " + alumnoSel.Matricula, "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        actualizarAlumnos(grupoSel.Alumnos);
+                    }
+                    else
+                    {
+                        MessageBox.Show("No se ha borrado al alumno " + alumnoSel.Nombre + " con matrícula " + alumnoSel.Matricula, "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Debe seleccionar una fila con un alumno válido para eliminar.");
+                }
             }
             else
             {
-                MessageBox.Show("No se ha borrado al alumno " + alumnoSel.Nombre + " con matrícula " + alumnoSel.Matricula, "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Debe seleccionar una fila con un alumno válido para eliminar.");
             }
+            
+
+            
+
+            
         }
 
         private void btnEditarAlumno_Click(object sender, EventArgs e)
         {
-            Alumno alumnoSel = (Alumno)dtgvAlumnos.SelectedRows[0].Cells[1].Value;
+            if (dtgvAlumnos.SelectedRows.Count > 0 && dtgvAlumnos.SelectedRows[0].Cells[1].Value != null)
+            {
+                Alumno alumnoSel = (Alumno)dtgvAlumnos.SelectedRows[0].Cells[1].Value;
 
-            FormDatosAlumno formCrearAlumno = new FormDatosAlumno(alumnoSel);
-            formCrearAlumno.ShowDialog();
-            actualizarAlumnos(grupoSel.Alumnos);
+                FormDatosAlumno formCrearAlumno = new FormDatosAlumno(alumnoSel);
+                formCrearAlumno.ShowDialog();
+                actualizarAlumnos(grupoSel.Alumnos);
+            }
+            else
+            {
+                MessageBox.Show("Debe seleccionar un alumno.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
         }
 
         private void btnFiltrarAlumno_Click(object sender, EventArgs e)
@@ -304,48 +365,59 @@ namespace Practica8
 
         public void insertarRegistro(Alumno alumno)
         {
-            // Obtener las propiedades del objeto
-            PropertyInfo[] properties = alumno.GetType().GetProperties();
 
-            // Crear una nueva fila
-            int rowIndex = dtgvAlumnos.Rows.Add();
-            DataGridViewRow row = dtgvAlumnos.Rows[rowIndex];
-
-            int numCelda = 0;
-
-            // Recorrer las propiedades
-            for (int i = 0; i < properties.Length; i++)
+            if (dtgvAlumnos.Columns.Count > 0)
             {
-                if (numCelda == 1)
+                // Agregar la fila
+                int rowIndex = dtgvAlumnos.Rows.Add();
+                DataGridViewRow row = dtgvAlumnos.Rows[rowIndex];
+
+                // Resto del código...
+                // Obtener las propiedades del objeto
+                PropertyInfo[] properties = alumno.GetType().GetProperties();
+
+                int numCelda = 0;
+
+                // Recorrer las propiedades
+                for (int i = 0; i < properties.Length; i++)
                 {
-                    row.Cells[numCelda].Value = alumno;
-                    numCelda++;
-                }
-                else
-                {
-                    if (properties[i].PropertyType.Name.Contains("[]"))
+                    if (numCelda == 1)
                     {
-                        double[] notas = (double[])properties[i].GetValue(alumno);
-
-                        for (int j = 0; j < notas.Length; j++)
-                        {
-                            row.Cells[numCelda].Value = notas[j];
-
-                            numCelda++;
-                        }
+                        row.Cells[numCelda].Value = alumno;
+                        numCelda++;
                     }
                     else
                     {
-                        row.Cells[numCelda].Value = properties[i].GetValue(alumno);
-                        numCelda++;
+                        if (properties[i].PropertyType.Name.Contains("[]"))
+                        {
+                            double[] notas = (double[])properties[i].GetValue(alumno);
+
+                            for (int j = 0; j < notas.Length; j++)
+                            {
+                                row.Cells[numCelda].Value = notas[j];
+
+                                numCelda++;
+                            }
+                        }
+                        else
+                        {
+                            row.Cells[numCelda].Value = properties[i].GetValue(alumno);
+                            numCelda++;
+                        }
                     }
                 }
+                dtgvAlumnos.CurrentCell = row.Cells[0];
+                btnBorrarAlumno.Enabled = true;
+                btnEditarAlumno.Enabled = true;
+                btnFiltrarAlumnos.Enabled = true;
+                row.Selected = true;
             }
-            dtgvAlumnos.CurrentCell = row.Cells[0];
-            btnBorrarAlumno.Enabled = true;
-            btnEditarAlumno.Enabled = true;
-            btnFiltrarAlumnos.Enabled = true;
-            row.Selected = true;
+            else
+            {
+                MessageBox.Show("No hay registros.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+           
         }
 
         private void actualizarAlumnos(List<Alumno> alumnos)

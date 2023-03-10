@@ -34,10 +34,19 @@ namespace Practica8
 
             this.CenterToParent();
 
-            grpNotas = new GroupBox();
-            txtNotas = new TextBox[FormMain.grupoSel.CodigosAsignaturas.Length];
+            if (FormMain.grupoSel != null)
+            {
+                grpNotas = new GroupBox();
+                txtNotas = new TextBox[FormMain.grupoSel.CodigosAsignaturas.Length];
 
-            crearTextBoxNotas(10, 40, 40);
+                crearTextBoxNotas(10, 40, 40);
+            }
+            else
+            {
+                MessageBox.Show("No hay un grupo seleccionado.");
+                // Cerrar el formulario o realizar otras acciones necesarias
+            }
+
         }
 
         public FormDatosAlumno(Alumno alumnoSel)
